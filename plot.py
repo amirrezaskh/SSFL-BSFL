@@ -58,17 +58,17 @@ def plot_results(plot_function, num_nodes, image_name, x_max):
     plot_function()
     
     # Formatting
-    plt.title(f'Performance Comparison of Learning Approaches ({num_nodes} Nodes)', fontsize=16, fontweight='bold')
-    plt.xlabel('Communication Rounds', fontsize=14)
-    plt.ylabel('Loss', fontsize=14)
+    plt.title(f'Performance Comparison of Learning Approaches ({num_nodes} Nodes)', fontsize=18, fontweight='bold')
+    plt.xlabel('Communication Rounds', fontsize=16)
+    plt.ylabel('Loss', fontsize=16)
     
     # Ticks
-    plt.xticks([1] + list(range(5, x_max + 5, 5)), fontsize=12)
-    plt.yticks(fontsize=12)
+    plt.xticks([1] + list(range(5, x_max + 5, 5)), fontsize=16)
+    plt.yticks(fontsize=16)
     
     # Grid and Legend
     plt.grid(True, which='both', linestyle='--', linewidth=0.6)
-    plt.legend(title="Methods", title_fontsize=13, loc='best')
+    plt.legend(title="Methods", title_fontsize=16, loc='best', fontsize=14)
     
     # Adjust layout and save the figure
     plt.tight_layout()
@@ -81,17 +81,17 @@ def plot_transmission(num_nodes, image_name, x_max):
     plot_times()
     
     # Titles and Labels
-    plt.title(f'Transmission Costs of Learning Approaches ({num_nodes} Nodes)', fontsize=16, fontweight='bold')
-    plt.xlabel('Communication Rounds', fontsize=14)
-    plt.ylabel('Cumulative Time', fontsize=14)
+    plt.title(f'Transmission Costs of Learning Approaches ({num_nodes} Nodes)', fontsize=18, fontweight='bold')
+    plt.xlabel('Communication Rounds', fontsize=16)
+    plt.ylabel('Cumulative Time', fontsize=16)
     
     # Ticks
-    plt.xticks([1] + list(range(5, x_max + 5, 5)), fontsize=12)
-    plt.yticks(fontsize=12)
+    plt.xticks([1] + list(range(5, x_max + 5, 5)), fontsize=16)
+    plt.yticks(fontsize=14)
     
     # Grid and Legend
     plt.grid(True, which='both', linestyle='--', linewidth=0.6)
-    plt.legend(title="Methods", title_fontsize=13, loc='upper left')
+    plt.legend(title="Methods", title_fontsize=16, loc='upper left', fontsize=14)
     
     # Adjust layout and save the figure
     plt.tight_layout()
