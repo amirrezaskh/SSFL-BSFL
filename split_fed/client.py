@@ -25,7 +25,6 @@ class Client:
         self.malicious = malicious
         self.root_path = Path(__file__).resolve().parents[1]
 
-    #CIFAR10
     def get_data(self):
         training_dataset = datasets.FashionMNIST(
             root="data",
@@ -56,16 +55,6 @@ class Client:
             self.training_dataset, batch_size=self.batch_size)
         self.test_dataloader = DataLoader(
             self.test_dataset, batch_size=test_portion)
-
-    #FEMNIST
-    # def get_data(self):
-    #     train_file = open(f"./data/femnist/train/node{self.port-8000}.json", "r")
-    #     train_data = json.loads(train_file.read())
-    #     test_file = open(f"./data/femnist/test/node{self.port-8000}.json", "r")
-    #     test_data = json.loads(test_file.read())
-    #     self.training_dataset, self.test_dataset = CustomImageDataset(train_data), CustomImageDataset(test_data)
-    #     self.training_dataloader = DataLoader(self.training_dataset, batch_size=self.batch_size)
-    #     self.test_dataloader = DataLoader(self.test_dataset, batch_size=len(self.test_dataset))
 
     def train(self, server_port):
         if self.malicious:
