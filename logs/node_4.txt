@@ -1,6 +1,6 @@
 Traceback (most recent call last):
-  File "/Users/amirrezasokhankhosh/Documents/test/SSFL-BSFL/nodes/./node0.py", line 13, in <module>
-    client = Client(port, ClientNN, malicious=False)
+  File "/Users/amirrezasokhankhosh/Documents/test/SSFL-BSFL/nodes/./node4.py", line 13, in <module>
+    client = Client(port, ClientNN, malicious=True)
   File "/Users/amirrezasokhankhosh/Documents/test/SSFL-BSFL/split_fed/client.py", line 24, in __init__
     self.get_data()
   File "/Users/amirrezasokhankhosh/Documents/test/SSFL-BSFL/split_fed/client.py", line 29, in get_data
