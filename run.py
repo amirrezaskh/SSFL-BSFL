@@ -108,7 +108,6 @@ if __name__ == '__main__':
     file.close()
 
 def run_node(i):
-    # Run node{i}.py in the background and redirect output to a log file
     log_file = f"../logs/node_{i}.txt"
     with open(log_file, "w") as f:
         subprocess.Popen(
@@ -116,13 +115,12 @@ def run_node(i):
             stdout=f,
             stderr=subprocess.STDOUT,
             stdin=subprocess.DEVNULL,
-            # To run the process in a new session (for Unix-like systems)
             preexec_fn=os.setsid
         )
 
 if __name__ == "__main__":
-    num_nodes = 36
-    num_malcious = 17
+    num_nodes = 9
+    num_malcious = 3
     malicious_nodes = [False for _ in range(num_nodes)]
     malicious_nodes[1:num_malcious+1] = [True for _ in range(num_malcious)]
     cwd = os.path.dirname(__file__)
@@ -133,19 +131,19 @@ if __name__ == "__main__":
     for i in range(num_nodes-1):
         create_node(i+1, malicious=malicious_nodes[i])
 
-    # Step 1: Bring up miners (start processes)
+    # Step 1: Bring up nodes
     print("Bringing up the nodes...")
     os.chdir(os.path.join(cwd, "nodes"))
     for i in range(num_nodes):
         run_node(i)
         time.sleep(1)
 
-    # Step 7: Re-initializing the model
+    # Step 2: Re-initializing the model
     print("Re-initializing the global model...")
     os.system("python3 ./model.py")
     time.sleep(1)
 
-    # Step 8: Sending start request
+    # Step 3: Sending start request
     clients = []
     for i in range(num_nodes - 1):
         client = {"port": 8000 + i + 1}
@@ -157,5 +155,4 @@ if __name__ == "__main__":
         "cycle": 0
     })
 
-    # The main script ends here, while the node processes continue running in the background
     print("Nodes have been started, and the script has completed.")
