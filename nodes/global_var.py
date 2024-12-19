@@ -21,7 +21,6 @@ from torchvision.transforms import ToTensor
 import torchvision.transforms as transforms
 
 
-
 class ClientNN(nn.Module):
     def __init__(self):
         super().__init__()
@@ -43,8 +42,8 @@ class ServerNN(nn.Module):
         self.relu = nn.ReLU()
 
     def forward(self, data):
-        x = self.pool(self.relu(self.conv2(data)))  # Conv2 -> ReLU -> Pool
-        x = x.view(-1, 64 * 7 * 7)              # Flatten
-        x = self.relu(self.fc1(x))               # Fully connected -> ReLU
-        x = self.fc2(x)                          # Fully connected
+        x = self.pool(self.relu(self.conv2(data)))
+        x = x.view(-1, 64 * 7 * 7)
+        x = self.relu(self.fc1(x))
+        x = self.fc2(x)
         return x
