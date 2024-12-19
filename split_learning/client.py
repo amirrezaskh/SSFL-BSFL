@@ -10,7 +10,6 @@ from torch.utils.data import DataLoader
 from torchvision.transforms import ToTensor
 
 
-
 class Client:
     def __init__(self, port, ClientNN, malicious=False):
         self.port = port
