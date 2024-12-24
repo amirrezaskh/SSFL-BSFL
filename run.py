@@ -107,7 +107,6 @@ if __name__ == '__main__':
     file.close()
 
 def run_node(i):
-    # Run node{i}.py in the background and redirect output to a log file
     log_file = f"../logs/node_{i}.txt"
     with open(log_file, "w") as f:
         subprocess.Popen(
@@ -115,25 +114,27 @@ def run_node(i):
             stdout=f,
             stderr=subprocess.STDOUT,
             stdin=subprocess.DEVNULL,
-            preexec_fn=os.setsid  # To run the process in a new session (for Unix-like systems)
+            preexec_fn=os.setsid
         )
 
 if __name__ == "__main__":
-    num_nodes = 36
-    num_clients = 5
+    num_nodes = 9
+    num_clients = 2
     cwd = os.path.dirname(__file__)
 
+    # Step 1: Create the nodes
     os.chdir(os.path.join(cwd, "nodes"))
     print("Create Nodes.")
     for i in range(num_nodes):
         create_node(i, num_clients=num_clients)
 
-    # Step 1 : Bring up the network
+    # Step 2 : Bring up the network
     print("Bringing up the network...")
     os.chdir(os.path.join(cwd, "test-network"))
     os.system("./network.sh down")
     os.system("sh ./start.sh")
 
+    # Step 3: Bring up the express applications
     print("Bringing up the express applications...")
     os.chdir(os.path.join(cwd, "express-application"))
     with open("../logs/app1.txt", "w") as f:
@@ -142,10 +143,10 @@ if __name__ == "__main__":
             stdout=f,
             stderr=subprocess.STDOUT,
             stdin=subprocess.DEVNULL,
-            preexec_fn=os.setsid  # To run the process in a new session (for Unix-like systems)
+            preexec_fn=os.setsid
         )
 
-    # Step 1: Bring up nodes (start processes)
+    # Step 4: Bring up the nodes
     print("Bringing up the nodes...")
     os.chdir(os.path.join(cwd, "nodes"))
     for i in range(num_nodes):
@@ -162,17 +163,18 @@ if __name__ == "__main__":
         )
     time.sleep(1)
 
+    # Step 5: Initalize the ledger
     os.chdir(os.path.join(cwd, "test-network"))
     os.system("sh ./req.sh")
 
-    # Step 7: Re-initializing the model
+    # Step 6: Re-initializing the model
     print("Re-initializing the global model...")
     os.chdir(os.path.join(cwd, "nodes"))
     os.system("python3 ./model.py")
     time.sleep(1)
 
-    print("Starting the mining process...")
+    # Step 7: Start the training process
+    print("Starting the training process...")
     requests.get("http://localhost:3000/start/")
 
-    # The main script ends here, while the node processes continue running in the background
     print("Nodes have been started, and the script has completed.")

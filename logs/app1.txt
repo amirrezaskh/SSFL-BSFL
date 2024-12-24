@@ -1,15 +1,24 @@
-Server is listening on localhost:3000.
+node:internal/modules/cjs/loader:1152
+  throw err;
+  ^
 
-*** CYCLE 1 STARTED ***
-Training started.
-Evaluation started.
-Winners:
-{
-  servers: [ 'node_6', 'node_8' ],
-  clients: [ 'node_1', 'node_0', 'node_5', 'node_4' ]
+Error: Cannot find module 'express'
+Require stack:
+- /Users/amirrezasokhankhosh/Documents/test/SSFL-BSFL/express-application/app1.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1149:15)
+    at Module._load (node:internal/modules/cjs/loader:990:27)
+    at Module.require (node:internal/modules/cjs/loader:1237:19)
+    at require (node:internal/modules/helpers:176:18)
+    at Object.<anonymous> (/Users/amirrezasokhankhosh/Documents/test/SSFL-BSFL/express-application/app1.js:19:17)
+    at Module._compile (node:internal/modules/cjs/loader:1378:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1437:10)
+    at Module.load (node:internal/modules/cjs/loader:1212:32)
+    at Module._load (node:internal/modules/cjs/loader:1028:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:142:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/amirrezasokhankhosh/Documents/test/SSFL-BSFL/express-application/app1.js'
+  ]
 }
-Aggregation completed.
-*** CYCLE 1 COMPLETED *** 
 
-Cycle trip times is saved.
-All cycles completed.
+Node.js v21.6.2
