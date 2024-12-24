@@ -51,7 +51,7 @@ In the BSFL framework, a **node** refers to any entity in the system, including 
 2. **`stop.py`**:
    - Gracefully terminates all processes in the system if the training needs to be stopped manually.
 
----
+
 
 ## Federated and Blockchain Features
 
@@ -76,7 +76,7 @@ The BSFL framework employs a blockchain-based consensus mechanism to replace tra
 2. **Fairness and Security**:
    - Model updates are evaluated to exclude malicious contributions, ensuring robust global model performance.
 
----
+
 
 ## Installation
 
@@ -117,7 +117,7 @@ The BSFL framework employs a blockchain-based consensus mechanism to replace tra
     ```bash
     python3 stop.py
 
-### Testing and Evaluation
+## Testing and Evaluation
 The experiment evaluates the scalability, performance, and security of the BSFL framework. The results are stored as follows:
 
 - **Shard Server and Client Losses**: Stored in the losses folder.
