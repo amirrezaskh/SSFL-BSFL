@@ -25,7 +25,6 @@ class Client:
         self.malicious = malicious
         self.root_path = Path(__file__).resolve().parents[1]
 
-    #CIFAR10 or Fas
     def get_data(self):
         training_dataset = datasets.FashionMNIST(
             root="data",
@@ -45,16 +44,6 @@ class Client:
         test_portion = len(test_dataset) // 9
         test_indexes = [random.randint(0, len(test_dataset) - 1) for _ in range(test_portion)]
 
-        # data_portion = len(training_dataset) // self.num_nodes
-        # start_index = (self.port - 8000) * data_portion
-        # end_index = (self.port - 8000 + 1) * data_portion
-        # indexes = list(range(start_index, end_index))
-
-        # test_portion = len(test_dataset) // self.num_nodes
-        # test_start_index = (self.port - 8000) * test_portion
-        # test_end_index = (self.port - 8000 + 1) * test_portion
-        # test_indexes = list(range(test_start_index, test_end_index))
-
         self.training_dataset = torch.utils.data.Subset(training_dataset, indexes)
         self.test_dataset = torch.utils.data.Subset(test_dataset, test_indexes)
 
@@ -62,17 +51,6 @@ class Client:
             self.training_dataset, batch_size=self.batch_size)
         self.test_dataloader = DataLoader(
             self.test_dataset, batch_size=test_portion)
-
-    #FEMNIST
-    # def get_data(self):
-    #     train_file = open(f"./data/femnist/train/node{self.port-8000}.json", "r")
-    #     train_data = json.loads(train_file.read())
-    #     test_file = open(f"./data/femnist/test/node{self.port-8000}.json", "r")
-    #     test_data = json.loads(test_file.read())
-    #     self.training_dataset, self.test_dataset = CustomImageDataset(train_data), CustomImageDataset(test_data)
-    #     self.training_dataloader = DataLoader(self.training_dataset, batch_size=self.batch_size)
-    #     self.test_dataloader = DataLoader(self.test_dataset, batch_size=len(self.test_dataset))
-
 
     def load_model(self): 
         self.model.load_state_dict(torch.load("./models/global_client.pth"))
